@@ -4,5 +4,5 @@ import {NotFoundComponent} from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
     {path:'', component: HomeComponent, pathMatch: 'full'},
-    {path:'*', component: NotFoundComponent, pathMatch: 'full'},
+    {path:'**', component: NotFoundComponent},
 ];

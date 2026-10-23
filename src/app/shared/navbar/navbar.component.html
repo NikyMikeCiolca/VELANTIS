@@ -1,1 +1,47 @@
-<p>navbar works!</p>
+
+<header class="site-header">
+  <div class="header-inner">
+    <!-- IDENTIDAD DE MARCA -->
+    <a
+      class="brand"
+      routerLink="/"
+      aria-label="Velantis, inicio"
+    >
+      <img
+        class="brand-icon"
+        src="/imgs/VELANTIS-LOGO.png"
+        alt=""
+        width="42"
+        height="42"
+      />
+
+      <span class="wordmark">VELANTIS</span>
+    </a>
+
+    <!-- NAVEGACIÓN PRINCIPAL -->
+    <nav class="main-nav" aria-label="Navegación principal">
+      <a routerLink="/coleccion/mujer" routerLinkActive="active">
+        MUJER
+      </a>
+
+      <a routerLink="/coleccion/hombre" routerLinkActive="active">
+        HOMBRE
+      </a>
+
+      <a routerLink="/coleccion/unisex" routerLinkActive="active">
+        UNISEX
+      </a>
+    </nav>
+
+    <!-- FUTURO COMPONENTE: CONTROL DE RADIO -->
+    <button
+      class="radio-link"
+      type="button"
+      aria-label="Radio próximamente"
+      disabled
+    >
+      <span class="radio-indicator" aria-hidden="true"></span>
+      <span>RADIO</span>
+    </button>
+  </div>
+</header>

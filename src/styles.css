@@ -1,0 +1,21 @@
+:root {
+  --color-white: #fafafa;
+  --color-marble: #ededed;
+  --color-sky-blue: #b7d6ff;
+  --color-aqua: #7ed3c7;
+  --color-charcoal: #0f0f10;
+  --color-gray: #8a8a8a;
+  --color-iridescent: #e6f0ff;
+  --color-glass: rgb(255 255 255 / 20%);
+
+  --font-main: 'Figtree Variable', sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --tracking-wide: 0.24em;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+}
