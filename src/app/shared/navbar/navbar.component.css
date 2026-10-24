@@ -101,32 +101,6 @@
   transform: scaleX(1);
 }
 
-/* RADIO */
-
-.radio-link {
-  display: inline-flex;
-  justify-self: end;
-  align-items: center;
-  gap: 10px;
-
-  padding: 10px 0;
-  border: 0;
-  background: transparent;
-  cursor: default;
-  opacity: 0.75;
-}
-
-.radio-link:disabled {
-  color: #55585d;
-}
-
-.radio-indicator {
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: #7ed3c7;
-  box-shadow: 0 0 12px rgba(126, 211, 199, 0.45);
-}
 
 /* TABLET */
 
