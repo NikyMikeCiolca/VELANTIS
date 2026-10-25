@@ -107,6 +107,38 @@
   line-height: 1.9;
 }
 
+#hero-title {
+  color: #0f0f10;
+  cursor: default;
+
+  transition:
+    color 350ms ease,
+    letter-spacing 350ms ease;
+}
+
+#hero-title span {
+  display: inline-block;
+  color: #777e88;
+
+  transition:
+    color 350ms ease,
+    transform 350ms ease;
+}
+
+/* Efectos independientes por línea */
+@media (hover: hover) and (pointer: fine) {
+  /* Primera línea: azul cielo */
+  #hero-title:not(:has(span:hover)):hover {
+    color: #548dbb;
+  }
+
+  /* Segunda línea: aqua */
+  #hero-title span:hover {
+    color: #65bdb5;
+    transform: translateX(5px);
+  }
+}
+
 .text-link {
   display: inline-flex;
   align-items: center;
@@ -541,6 +573,16 @@
   font-size: 13px;
   font-weight: 300;
   line-height: 1.9;
+}
+
+.manifesto-content h2 span {
+  transition: color 350ms ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .manifesto-content:hover h2 span {
+    color: #65bdb5;
+  }
 }
 
 /* =========================================
