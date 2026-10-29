@@ -1,0 +1,15 @@
+<div class="viewer" role="group" [attr.aria-label]="label()">
+  <canvas #canvas></canvas>
+
+  @switch (status()) {
+  @case ('loading') {
+  <p class="viewer__status">Cargando modelo…</p>
+  }
+  @case ('error') {
+  <p class="viewer__status">No se pudo cargar el modelo 3D.</p>
+  }
+  @case ('ready') {
+  <p class="viewer__hint">Arrastra para girar</p>
+  }
+  }
+</div>

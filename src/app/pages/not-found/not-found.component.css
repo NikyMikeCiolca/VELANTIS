@@ -1,0 +1,109 @@
+:host {
+  display: block;
+}
+
+.nf {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  min-height: 70vh;
+  padding: 8rem 1.5rem 4.5rem;
+  overflow: hidden;
+  text-align: center;
+  background: linear-gradient(180deg, #f1f4f8 0%, #fafafa 70%);
+}
+
+/* La barra: una línea metálica fina de lado a lado */
+.nf__rail {
+  position: absolute;
+  top: 2.5rem;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(180deg, #fff, #c3ccd8 60%, #9aa7b8);
+  box-shadow: 0 6px 10px -6px rgb(80 110 170 / 0.45);
+}
+
+.nf__hanger {
+  position: absolute;
+  top: 2.6rem;
+  left: 50%;
+  width: clamp(110px, 18vw, 150px);
+  margin-left: calc(clamp(110px, 18vw, 150px) / -2);
+  transform-origin: 50% 8px;
+  animation: nf-sway 6s ease-in-out infinite;
+}
+
+@keyframes nf-sway {
+
+  0%,
+  100% {
+    rotate: -3.5deg;
+  }
+
+  50% {
+    rotate: 3.5deg;
+  }
+}
+
+.nf__code {
+  margin: 0;
+  font-size: clamp(5rem, 18vw, 10rem);
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: 0.18em;
+  padding-left: 0.18em;
+  color: rgb(15 15 16 / 0.08);
+}
+
+.nf__title {
+  margin: 0.5rem 0 0.75rem;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 300;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+.nf__text {
+  margin: 0 0 2.25rem;
+  color: #5b5b5f;
+}
+
+.nf__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 2.25rem;
+}
+
+/* Enlace de texto con flecha: el mismo lenguaje que "EXPLORAR COLECCIÓN ↗" del inicio */
+.nf__link {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #0f0f10;
+  color: #0f0f10;
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: border-color 0.25s;
+}
+
+.nf__link:visited {
+  color: #0f0f10;
+}
+
+.nf__link:hover {
+  border-color: #7ed3c7;
+}
+
+.nf__link:focus-visible {
+  outline: 2px solid #0f0f10;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf__hanger {
+    animation: none;
+  }
+}

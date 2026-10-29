@@ -1,3 +1,6 @@
+@import '@fontsource-variable/montserrat';
+@import '@fontsource-variable/inter';
+
 :root {
   --color-white: #fafafa;
   --color-marble: #ededed;
@@ -8,9 +11,8 @@
   --color-iridescent: #e6f0ff;
   --color-glass: rgb(255 255 255 / 20%);
 
-  --font-main: 'Figtree Variable', sans-serif;
-  --font-heading: 'Montserrat', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: 'Montserrat Variable', sans-serif;
+  --font-body: 'Inter Variable', sans-serif;
 
   --tracking-wide: 0.24em;
 }

@@ -10,17 +10,26 @@
   border: 0;
   background: transparent;
   color: #0f0f10;
- 
+
   /* Al cerrar, el cristal se disuelve y deja ver home */
   opacity: 1;
   transition: opacity 0.9s ease, overlay 0.9s allow-discrete, display 0.9s allow-discrete;
 }
-.gate:not([open]) { opacity: 0; }
-@starting-style {
-  .gate[open] { opacity: 0; }
+
+.gate:not([open]) {
+  opacity: 0;
 }
-.gate::backdrop { background: transparent; }
- 
+
+@starting-style {
+  .gate[open] {
+    opacity: 0;
+  }
+}
+
+.gate::backdrop {
+  background: transparent;
+}
+
 .gate__inner {
   display: grid;
   place-content: center;
@@ -35,17 +44,25 @@
     radial-gradient(30rem 20rem at 72% 22%, rgba(126, 211, 199, 0.25), transparent 60%),
     #fafafa;
 }
- 
-.gate__logo { filter: drop-shadow(0 24px 30px rgba(120, 160, 220, 0.35)); margin-bottom: 0.5rem; }
- 
+
+.gate__logo {
+  filter: drop-shadow(0 24px 30px rgba(120, 160, 220, 0.35));
+  margin-bottom: 0.5rem;
+}
+
 .gate__title {
-  padding-left: 0.5em; /* compensa el tracking final para centrar */
+  padding-left: 0.5em;
+  /* compensa el tracking final para centrar */
   font-size: clamp(1.5rem, 7vw, 3rem);
   letter-spacing: 0.5em;
 }
- 
-.gate__text { max-width: 30ch; font-size: 0.9rem; color: #5b5b5f; }
- 
+
+.gate__text {
+  max-width: 30ch;
+  font-size: 0.9rem;
+  color: #5b5b5f;
+}
+
 .gate__enter {
   margin-top: 1rem;
   padding: 1rem 3rem 1rem calc(3rem + 0.35em);
@@ -61,8 +78,12 @@
   cursor: pointer;
   transition: background-color 0.3s, border-color 0.3s;
 }
-.gate__enter:hover { background: #b7d6ff; border-color: #b7d6ff; }
- 
+
+.gate__enter:hover {
+  background: #b7d6ff;
+  border-color: #b7d6ff;
+}
+
 .gate__mute {
   padding: 0.5rem;
   border: 0;
@@ -74,4 +95,7 @@
   text-underline-offset: 4px;
   cursor: pointer;
 }
-.gate__mute:hover { color: #0f0f10; }
+
+.gate__mute:hover {
+  color: #0f0f10;
+}

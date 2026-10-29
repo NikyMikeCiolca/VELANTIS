@@ -1,0 +1,144 @@
+.producto {
+  max-width: 75rem;
+  margin-inline: auto;
+  padding: clamp(2rem, 6vw, 4rem) clamp(1.25rem, 4vw, 2.5rem);
+}
+
+.producto__back {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #5b5b5f;
+}
+
+.producto__grid {
+  display: grid;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: 2rem;
+}
+
+@media (min-width: 900px) {
+  .producto__grid {
+    grid-template-columns: 1.1fr 1fr;
+    align-items: start;
+  }
+}
+
+.producto__visual {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 4 / 5;
+  border-radius: 22px;
+  background: linear-gradient(150deg, #fff, #e8f0fb);
+  color: #8a8a8a;
+}
+
+.producto__ref {
+  font-size: 0.72rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #5b5b5f;
+}
+
+h1 {
+  margin: 0.5rem 0 1rem;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-weight: 300;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+h2 {
+  margin: 2rem 0 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.producto__desc,
+.producto__model {
+  color: #5b5b5f;
+}
+
+ul {
+  padding-left: 1.1rem;
+}
+
+.colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.colors li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 15, 16, 0.2);
+}
+
+.table-wrap {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 0.55rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(15, 15, 16, 0.1);
+}
+
+thead th {
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #5b5b5f;
+}
+
+.producto__stock {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.producto__visual app-garment-art {
+  width: 55%;
+}
+
+.colors__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.1rem;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+.colors__btn:hover {
+  border-color: #b7d6ff;
+}
+
+.colors__btn.is-selected {
+  border-color: #7ed3c7;
+}

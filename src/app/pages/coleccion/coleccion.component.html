@@ -1,0 +1,18 @@
+<section class="coleccion">
+  <header class="coleccion__head">
+    <span class="coleccion__eyebrow">Colección 01 / 2027</span>
+    <h1 class="coleccion__title">{{ title() }}</h1>
+  </header>
+
+  <!-- Filtros: no son rutas, solo cambian ?prenda= -->
+  <nav class="filters" aria-label="Filtrar por prenda">
+    <a class="filters__link" [routerLink]="[]" [queryParams]="{ prenda: null }" [class.is-active]="!prenda()">Todas</a>
+    @for (g of garments(); track g) {
+    <a class="filters__link" [routerLink]="[]" [queryParams]="{ prenda: g }" [class.is-active]="prenda() === g">
+      {{ PRENDA_LABEL[g] }}
+    </a>
+    }
+  </nav>
+
+  <app-rack [products]="items()" />
+</section>

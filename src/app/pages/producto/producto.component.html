@@ -1,0 +1,86 @@
+@if (product(); as p) {
+  <article class="producto">
+    <a class="producto__back" [routerLink]="['/coleccion', p.genero]" [queryParams]="{ prenda: p.prenda }">
+      ← {{ GENERO_LABEL[p.genero] }} / {{ PRENDA_LABEL[p.prenda] }}
+    </a>
+
+    <div class="producto__grid">
+      <div class="producto__media">
+        @if (p.media.glb; as glb) {
+          <!-- three.js se descarga solo cuando el visor entra en pantalla -->
+          @defer (on viewport; prefetch on idle) {
+            <app-model-viewer [src]="glb" [color]="activeColor()" [label]="'Modelo 3D de ' + p.name" />
+          } @placeholder {
+            <div class="producto__visual">
+              <app-garment-art [prenda]="p.prenda" [color]="activeColor()" />
+            </div>
+          }
+        } @else {
+          <div class="producto__visual">
+            <app-garment-art [prenda]="p.prenda" [color]="activeColor()" />
+          </div>
+        }
+      </div>
+
+      <div class="producto__info">
+        <p class="producto__ref">{{ p.ref }} · {{ p.season }}</p>
+        <h1>{{ p.name }}</h1>
+        <p class="producto__price">{{ eur.format(p.price) }}</p>
+        <p class="producto__desc">{{ p.description }}</p>
+
+        <h2>Colores</h2>
+        <ul class="colors">
+          @for (c of p.colors; track c.name; let i = $index) {
+            <li>
+              <button
+                type="button"
+                class="colors__btn"
+                [class.is-selected]="i === selectedColorIndex()"
+                [attr.aria-pressed]="i === selectedColorIndex()"
+                (click)="selectColor(i)"
+              >
+                <span class="swatch" [style.background]="c.hex"></span>{{ c.name }}
+              </button>
+            </li>
+          }
+        </ul>
+
+        <h2>Composición</h2>
+        <p>
+          @for (m of p.materials; track m.fiber; let last = $last) {
+            {{ m.percent }} % {{ m.fiber }}{{ last ? '' : ', ' }}
+          }
+        </p>
+
+        <h2>Medidas (cm)</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Talla</th>
+                @for (m of medidas(); track m) { <th scope="col">{{ MEDIDA_LABEL[m] }}</th> }
+              </tr>
+            </thead>
+            <tbody>
+              @for (s of p.sizes; track s.label) {
+                <tr>
+                  <th scope="row">{{ s.label }}</th>
+                  @for (m of medidas(); track m) { <td>{{ s.measures[m] }}</td> }
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <h2>Cuidados</h2>
+        <ul>
+          @for (c of p.care; track c) { <li>{{ c }}</li> }
+        </ul>
+
+        <p class="producto__stock">
+          {{ p.availability === 'en-tienda' ? 'Disponible en tienda' : 'Próximamente en tienda' }}
+        </p>
+      </div>
+    </div>
+  </article>
+}

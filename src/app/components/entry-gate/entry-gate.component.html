@@ -1,11 +1,11 @@
-<dialog #gate class="gate" aria-label="Entrada a Velantis">
+<dialog #gate class="gate" aria-label="Entrada a Velantis" (cancel)="onCancel($event)">
   <div class="gate__inner">
     <img class="gate__logo" src="imgs/VELANTIS-LOGO.png" alt="" width="96" height="96" />
- 
+
     <p class="gate__title">VELANTIS</p>
     <p class="gate__text">Esta tienda tiene música. Podrás controlarla desde RADIO.</p>
- 
-    <button class="gate__enter" type="button" autofocus (click)="enter(true)">ENTRAR</button>
-    <button class="gate__mute" type="button" (click)="enter(false)">Entrar sin música</button>
+
+    <button class="gate__enter" type="button" autofocus (click)="choose('music')">ENTRAR</button>
+    <button class="gate__mute" type="button" (click)="choose('silent')">Entrar sin música</button>
   </div>
 </dialog>

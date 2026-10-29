@@ -1,0 +1,47 @@
+<div class="rack" role="region" aria-label="Perchero de prendas">
+  <div class="rack__caption" aria-hidden="true">
+    <span>Nueva temporada</span>
+    <span>{{ products().length }} {{ products().length === 1 ? 'prenda' : 'prendas' }}</span>
+  </div>
+
+  <div #scroller class="rack__scroller" (scroll)="onScroll()">
+    <div class="rack__stage">
+      <ul class="rack__list" [style.--pitch]="pitch() + 'px'" (pointermove)="onPointerMove($event)"
+        (pointerleave)="onPointerLeave()">
+        @for (p of products(); track p.id; let i = $index) {
+        <li #item class="rack__item" [class.is-active]="active() === i" [attr.data-index]="i">
+          <a class="rack__link" [attr.href]="href(p.slug)" (click)="open($event, p.slug, i)" (focus)="onFocus(i)"
+            (blur)="onBlur()">
+            <span #garment class="rack__garment" [attr.data-frames]="p.media.rackSprite?.frames ?? null">
+              @if (p.media.rackSprite; as sprite) {
+              <!-- Fotogramas renderizados desde el modelo 3D: dos capas que se funden entre sí -->
+              <span class="rack__sprite" [style.--frames]="sprite.frames">
+                <span class="rack__layer rack__layer--a" [style.background-image]="'url(' + sprite.src + ')'"></span>
+                <span class="rack__layer rack__layer--b" [style.background-image]="'url(' + sprite.src + ')'"></span>
+              </span>
+              } @else {
+              <!-- Silueta provisional hasta que exista el modelo 3D de la prenda -->
+              <span class="rack__art">
+                <app-garment-art [prenda]="p.prenda" [color]="p.colors[0].hex" />
+              </span>
+              }
+            </span>
+
+            <span class="rack__tag">
+              <span class="rack__name">{{ p.name }}</span>
+              <span class="rack__price">{{ eur.format(p.price) }}</span>
+            </span>
+          </a>
+        </li>
+        } @empty {
+        <li class="rack__empty">No hay prendas con ese filtro.</li>
+        }
+      </ul>
+    </div>
+  </div>
+
+  <p class="rack__hint">
+    <span class="rack__hint--hover">Pasa el ratón por una prenda para verla de cerca.</span>
+    <span class="rack__hint--touch">Desliza y toca dos veces una prenda para abrirla.</span>
+  </p>
+</div>
