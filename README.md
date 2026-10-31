@@ -8,9 +8,9 @@ Documento de especificación técnica y concepto para la aplicación web **VELAN
 
 * **Modelo de Negocio:** Catálogo digital interactivo (Showroom). No hay pasarela de pago ni carrito de transacciones. La compra final es en tienda física.
 
-* **Estética Visually Driven:** Minimalismo marmoleado blanco, estética Frutiger Aero/Y2K limpia, acabados cristalinos y luminosos.
+* **Estética Visually Driven:** Minimalismo marmoleado blanco, estética limpia, acabados cristalinos y luminosos.
 
-* **Despliegue:** 100% Estático (GitHub Pages / Vercel) para integración directa en portfolio sin costes de infraestructura.
+* **Despliegue:** 100% Estático (GitHub Pages) para integración directa en portfolio sin costes de infraestructura.
 
 ## 2. Entorno y Stack Tecnológico
 

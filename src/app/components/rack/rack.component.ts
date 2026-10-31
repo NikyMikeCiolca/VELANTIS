@@ -56,10 +56,11 @@ export class RackComponent {
   /** Índice de la prenda "sacada" del perchero (null = todas colgadas). */
   protected readonly active = signal<number | null>(null);
 
-  /** Separación entre perchas: pocas prendas → más aire; muchas → más juntas. */
+  /** Separación entre perchas: pocas prendas → más aire. En táctil, más separación para acertar con el dedo. */
   protected readonly pitch = computed(() => {
     const n = this.products().length;
-    return n <= 3 ? 150 : n <= 5 ? 125 : n <= 8 ? 105 : 80;
+    const base = n <= 3 ? 150 : n <= 5 ? 125 : n <= 8 ? 105 : 80;
+    return this.touchMode ? Math.max(base, 130) : base;
   });
 
   protected readonly eur = new Intl.NumberFormat('es-ES', { style: 'currency', currency: 'EUR' });
@@ -69,7 +70,7 @@ export class RackComponent {
   private readonly reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   private readonly states = new WeakMap<HTMLElement, ItemState>();
-  private frame = 0;
+  private settleTimer = 0;
 
   constructor() {
     // Cada vez que cambia la prenda activa (o la lista), GSAP lleva todas las prendas a su nueva pose.
@@ -81,18 +82,12 @@ export class RackComponent {
     });
 
     inject(DestroyRef).onDestroy(() => {
-      cancelAnimationFrame(this.frame);
+      clearTimeout(this.settleTimer);
       this.garmentEls().forEach((g) => {
         const state = this.states.get(g.nativeElement);
         if (state) gsap.killTweensOf(state);
       });
     });
-  }
-
-  /** Proporción alto/ancho de la prenda: las cortas cuelgan más cortas, como en una barra real. */
-  protected ratio(p: Product): number {
-    const sprite = p.media.rackSprite;
-    return sprite ? sprite.height / sprite.width : 1.5;
   }
 
   // ---------- Animación ----------
@@ -104,7 +99,7 @@ export class RackComponent {
     // Las vecinas se apartan lo justo; cuanto más lejos, menos se mueven (como ropa empujada en una barra).
     const d = Math.abs(i - active);
     return {
-      x: Math.sign(i - active) * width * 0.4 * 0.55 ** (d - 1),
+      x: Math.sign(i - active) * Math.max(width * 0.85 - this.pitch(), width * 0.12) * 0.55 ** (d - 1),
       y: 0,
       z: 0,
       t: [0.12, 0.05][d - 1] ?? 0, // las contiguas se "abren" un poco
@@ -122,7 +117,7 @@ export class RackComponent {
       const existing = this.states.get(el);
 
       if (!existing) {
-        // Primera vez: la prenda cae a su sitio con un pequeño escalonado.
+        // Primera vez: la prenda "cae" a su sitio con un pequeño escalonado.
         const state: ItemState = { x: 0, y: -28, z: 0, t: 0, o: 0 };
         this.states.set(el, state);
         this.paint(el, state);
@@ -207,12 +202,11 @@ export class RackComponent {
 
   // ---------- Táctil ----------
 
+  /** Mientras el dedo desliza no se anima nada; la prenda centrada se abre cuando el scroll se asienta. */
   protected onScroll(): void {
-    if (!this.touchMode || this.frame) return;
-    this.frame = requestAnimationFrame(() => {
-      this.frame = 0;
-      this.activateCentered();
-    });
+    if (!this.touchMode) return;
+    clearTimeout(this.settleTimer);
+    this.settleTimer = window.setTimeout(() => this.activateCentered(), 90);
   }
 
   private activateCentered(): void {
@@ -233,6 +227,13 @@ export class RackComponent {
     if (this.active() !== best) this.active.set(best);
   }
 
+  private centerItem(index: number): void {
+    const scroller = this.scroller().nativeElement;
+    const li = this.itemEls()[index].nativeElement;
+    const left = li.offsetLeft + li.offsetWidth / 2 - scroller.clientWidth / 2;
+    scroller.scrollTo({ left, behavior: 'smooth' });
+  }
+
   // ---------- Navegación ----------
 
   protected href(slug: string): string {
@@ -246,7 +247,7 @@ export class RackComponent {
 
     // En táctil, el primer toque centra la prenda y el segundo la abre.
     if (this.touchMode && this.active() !== index) {
-      this.itemEls()[index].nativeElement.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      this.centerItem(index);
       return;
     }
 

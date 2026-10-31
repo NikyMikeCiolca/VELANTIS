@@ -1,9 +1,13 @@
 :host {
   display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   /* Todas las prendas ocupan la MISMA caja (4:5), sea cual sea su largo */
   --garment-w: clamp(170px, 24vw, 230px);
   --garment-h: calc(var(--garment-w) * 1.25);
   --bar-top: 1.5rem;
+  --hook-y: calc(var(--garment-h) * 0.052);
 }
 
 /* ---------- Banda: sin adornos, solo luz suave y dos líneas finas ---------- */
@@ -23,6 +27,7 @@
 }
 
 .rack__scroller {
+  container-type: inline-size;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
@@ -42,7 +47,7 @@
 .rack__stage::before {
   content: '';
   position: absolute;
-  top: var(--bar-top);
+  top: calc(var(--bar-top) + var(--hook-y) - 1.5px);
   left: 0;
   right: 0;
   height: 3px;
@@ -54,7 +59,7 @@
 .rack__list {
   position: relative;
   display: flex;
-  justify-content: center;
+  justify-content: safe center;
   width: 100%;
   margin: 0;
   padding: var(--bar-top) calc(var(--garment-w) * 0.6) 1rem;
@@ -204,7 +209,7 @@
   }
 
   .rack__list {
-    padding-inline: calc(50vw - var(--pitch) / 2);
+    padding-inline: calc(50cqw - var(--pitch) / 2);
   }
 
   .rack__hint--hover {
